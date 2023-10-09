@@ -7,8 +7,9 @@ import "../utils/Exponential.sol";
 import "../interfaces/compound/IComptroller.sol";
 import "../interfaces/compound/ICToken.sol";
 import "../interfaces/compound/ICompoundOracle.sol";
+import "./helpers/ViewHelper.sol";
 
-contract CompView is Exponential, DSMath {
+contract CompView is Exponential, DSMath, ViewHelper {
 
     struct LoanData {
         address user;
@@ -44,9 +45,8 @@ contract CompView is Exponential, DSMath {
     }
 
     address public constant ETH_ADDRESS = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
-    address public constant CETH_ADDRESS = 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5;
 
-    IComptroller public constant comp = IComptroller(0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B);
+    IComptroller public constant comp = IComptroller(COMPTROLLER_ADDR);
 
     function getSafetyRatio(address _user) public view returns (uint) {
         // For each asset the account is in

@@ -3,10 +3,10 @@ pragma solidity =0.8.10;
 
 import "../interfaces/uniswap/IUniswapV2Pair.sol";
 import "../interfaces/uniswap/IUniswapV2Factory.sol";
+import "./helpers/ViewHelper.sol";
 
-contract UniswapV2View {
-    address constant public UNISWAP_V2_FACTORY_ADDR = 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f;
-    IUniswapV2Factory constant public UniswapV2Factory = IUniswapV2Factory(UNISWAP_V2_FACTORY_ADDR);
+contract UniswapV2View is ViewHelper {
+    IUniswapV2Factory constant public UniswapV2Factory = IUniswapV2Factory(UNI_V2_FACTORY_ADDR);
 
     function getPairInfo(address _pair) external view returns (
         address token0,

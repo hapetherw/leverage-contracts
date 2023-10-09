@@ -5,12 +5,12 @@ pragma solidity =0.8.10;
 import "../interfaces/compound/IComptroller.sol";
 import "../interfaces/IERC20.sol";
 import "../utils/Exponential.sol";
+import "./helpers/ViewHelper.sol";
 
-contract CompRewardView is Exponential {
+contract CompRewardView is Exponential, ViewHelper {
     IComptroller public constant comp = IComptroller(
-        0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B
+        COMPTROLLER_ADDR
     );
-    address public constant COMP_ADDR = 0xc00e94Cb662C3520282E6f5717214004A7f26888;
     uint224 public constant compInitialIndex = 1e36;
 
     function _claim(

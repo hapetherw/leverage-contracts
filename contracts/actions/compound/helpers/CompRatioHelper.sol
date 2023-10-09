@@ -12,7 +12,7 @@ import "./MainnetCompAddresses.sol";
 
 contract CompRatioHelper is Exponential, DSMath, MainnetCompAddresses {
     // solhint-disable-next-line const-name-snakecase
-    IComptroller public constant comp = IComptroller(0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B);
+    IComptroller public constant comp = IComptroller(COMPTROLLER_ADDR);
 
     /// @notice Calculated the ratio of debt / adjusted collateral
     /// @param _user Address of the user

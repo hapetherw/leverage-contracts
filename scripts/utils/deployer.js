@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-require('dotenv-safe').config();
+require('dotenv').config();
 
 const hre = require('hardhat');
 const ethers = require('ethers');

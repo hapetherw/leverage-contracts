@@ -5,9 +5,11 @@ import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "hardhat-contract-sizer";
 
 import * as dotenv from "dotenv";
 dotenv.config();
+
 const chainIds = {
   // ethereum
   mainnet: 1,
@@ -33,6 +35,12 @@ const MAIN_ETH_RPC_URL = process.env.MAIN_ETH_RPC_URL;
 const config = {
   defaultNetwork: "hardhat",
   networks: {
+    local: {
+      url: 'http://127.0.0.1:8545',
+      timeout: 1000000,
+      gasPrice: 170000000000,
+      name: 'mainnet',
+    },
     hardhat: {
       forking: {
           url: process.env.MAIN_ETH_RPC_URL,
