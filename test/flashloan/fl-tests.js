@@ -33,7 +33,6 @@ const aaveFlTest = async (generalisedFLFlag) => {
             aaveFl;
 
         const FLASHLOAN_TOKENS = ['WETH', 'DAI', 'USDC', 'WBTC', 'USDT', 'YFI', 'LINK', 'MKR'];
-
         before(async () => {
             const flAaveAddr = await getAddrFromRegistry('FLAaveV2');
             aaveFl = await hre.ethers.getContractAt('FLAaveV2', flAaveAddr);

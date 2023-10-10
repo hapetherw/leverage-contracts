@@ -12,10 +12,12 @@
     "lint": "./node_modules/.bin/solhint -f table contracts/**/*.sol",
     "pretty": "./node_modules/.bin/prettier --write contracts/**/*.sol",
     "coverage": "npx hardhat coverage",
-    "size:check": "npx hardhat size-contracts"
+    "size:check": "npx hardhat size-contracts",
+    "fetch:price": "node scripts/utils/price-tracker.js"
   },
   "devDependencies": {
     "@defisaver/sdk": "^1.0.51",
+    "@defisaver/tokens": "^1.5.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.7",
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.1.2",

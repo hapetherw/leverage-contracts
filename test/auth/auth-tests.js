@@ -16,10 +16,11 @@ const {
     getProxy,
     WETH_ADDRESS,
     addrs,
-    getNetwork
+    getNetwork,
+    getOwnerAddr
 } = require('../utils.js');
 
-const OWNER_ACC = addrs[getNetwork()].OWNER_ACC;
+const OWNER_ACC = getOwnerAddr()
 const ADMIN_ACC = addrs[getNetwork()].ADMIN_ACC;
 
 const adminAuthTest = async () => {

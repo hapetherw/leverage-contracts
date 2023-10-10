@@ -106,7 +106,7 @@
     web3-eth-abi "^1.8.0"
     web3-utils "^1.8.0"
 
-"@defisaver/tokens@^1.4.55":
+"@defisaver/tokens@^1.4.55", "@defisaver/tokens@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@defisaver/tokens/-/tokens-1.5.0.tgz#7ab0411f86b7d4dd904bca25b7dc614e82f0c6ce"
   integrity sha512-FT13f5OKL05rhh5TyCYQeKb94WxTVMe13wXOLMqXIWDVJTSSG7u2UMPpQJWLGUDKKLhzoxQ7/EtT76H5bwwGmw==

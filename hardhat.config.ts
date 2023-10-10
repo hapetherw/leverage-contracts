@@ -3,7 +3,7 @@ import "@typechain/hardhat";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
-import "hardhat-gas-reporter";
+// import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "hardhat-contract-sizer";
 
@@ -34,6 +34,7 @@ const MAIN_ETH_RPC_URL = process.env.MAIN_ETH_RPC_URL;
 
 const config = {
   defaultNetwork: "hardhat",
+  lightTesting: true,
   networks: {
     local: {
       url: 'http://127.0.0.1:8545',
@@ -89,10 +90,10 @@ const config = {
   mocha: {
     timeout: 100000,
   },
-  gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
-  },
+  // gasReporter: {
+  //   enabled: process.env.REPORT_GAS !== undefined,
+  //   currency: "USD",
+  // },
   contractSizer: {
     alphaSort: true,
     disambiguatePaths: false,

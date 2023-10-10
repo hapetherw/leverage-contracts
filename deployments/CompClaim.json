@@ -1,6 +1,16 @@
 {
-	"contractName": "FLAaveV2",
+	"contractName": "CompClaim",
 	"abi": [
+		{
+			"inputs": [],
+			"name": "CompEnterMarketError",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "CompExitMarketError",
+			"type": "error"
+		},
 		{
 			"inputs": [],
 			"name": "NonContractCall",
@@ -8,22 +18,7 @@
 		},
 		{
 			"inputs": [],
-			"name": "OnlyAaveCallerError",
-			"type": "error"
-		},
-		{
-			"inputs": [],
-			"name": "ReentrantCall",
-			"type": "error"
-		},
-		{
-			"inputs": [],
 			"name": "ReturnIndexValueError",
-			"type": "error"
-		},
-		{
-			"inputs": [],
-			"name": "SameCallerError",
 			"type": "error"
 		},
 		{
@@ -140,19 +135,6 @@
 		},
 		{
 			"inputs": [],
-			"name": "addressesProvider",
-			"outputs": [
-				{
-					"internalType": "contract ILendingPoolAddressesProviderV2",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
 			"name": "adminVault",
 			"outputs": [
 				{
@@ -167,23 +149,36 @@
 		{
 			"inputs": [
 				{
+					"internalType": "address",
+					"name": "_cTokenAddr",
+					"type": "address"
+				}
+			],
+			"name": "enterMarket",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "bytes",
 					"name": "_callData",
 					"type": "bytes"
 				},
 				{
 					"internalType": "bytes32[]",
-					"name": "",
+					"name": "_subData",
 					"type": "bytes32[]"
 				},
 				{
 					"internalType": "uint8[]",
-					"name": "",
+					"name": "_paramMapping",
 					"type": "uint8[]"
 				},
 				{
 					"internalType": "bytes32[]",
-					"name": "",
+					"name": "_returnValues",
 					"type": "bytes32[]"
 				}
 			],
@@ -214,39 +209,13 @@
 		{
 			"inputs": [
 				{
-					"internalType": "address[]",
-					"name": "_assets",
-					"type": "address[]"
-				},
-				{
-					"internalType": "uint256[]",
-					"name": "_amounts",
-					"type": "uint256[]"
-				},
-				{
-					"internalType": "uint256[]",
-					"name": "_fees",
-					"type": "uint256[]"
-				},
-				{
 					"internalType": "address",
-					"name": "_initiator",
+					"name": "_cTokenAddr",
 					"type": "address"
-				},
-				{
-					"internalType": "bytes",
-					"name": "_params",
-					"type": "bytes"
 				}
 			],
-			"name": "executeOperation",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
+			"name": "exitMarket",
+			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
 		},
@@ -284,42 +253,27 @@
 					"components": [
 						{
 							"internalType": "address[]",
-							"name": "tokens",
+							"name": "cTokensSupply",
 							"type": "address[]"
 						},
 						{
-							"internalType": "uint256[]",
-							"name": "amounts",
-							"type": "uint256[]"
-						},
-						{
-							"internalType": "uint256[]",
-							"name": "modes",
-							"type": "uint256[]"
+							"internalType": "address[]",
+							"name": "cTokensBorrow",
+							"type": "address[]"
 						},
 						{
 							"internalType": "address",
-							"name": "onBehalfOf",
+							"name": "from",
 							"type": "address"
 						},
 						{
 							"internalType": "address",
-							"name": "flParamGetterAddr",
+							"name": "to",
 							"type": "address"
-						},
-						{
-							"internalType": "bytes",
-							"name": "flParamGetterData",
-							"type": "bytes"
-						},
-						{
-							"internalType": "bytes",
-							"name": "recipeData",
-							"type": "bytes"
 						}
 					],
-					"internalType": "struct IFlashLoanBase.FlashLoanParams",
-					"name": "inputData",
+					"internalType": "struct CompClaim.Params",
+					"name": "params",
 					"type": "tuple"
 				}
 			],
@@ -361,15 +315,11 @@
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
-		},
-		{
-			"stateMutability": "payable",
-			"type": "receive"
 		}
 	],
 	"networks": {
 		"local": {
-			"address": "0xFCa5Bb3732185AE6AaFC65aD8C9A4fBFf21DbaaD",
+			"address": "0x3489745eff9525CCC3d8c648102FE2cf3485e228",
 			"args": []
 		}
 	}
