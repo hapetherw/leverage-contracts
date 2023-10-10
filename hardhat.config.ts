@@ -29,7 +29,7 @@ const PRIVATE_KEY = process.env.PK || "";
 
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY || "";
 
-const TEST_ETH_RPC_URL = process.env.TEST_ETH_RPC_URL;
+const GOERLI_ETH_RPC_URL = process.env.GOERLI_ETH_RPC_URL;
 const MAIN_ETH_RPC_URL = process.env.MAIN_ETH_RPC_URL;
 
 const config = {
@@ -55,13 +55,15 @@ const config = {
       url: MAIN_ETH_RPC_URL,
       chainId: chainIds.mainnet,
       accounts: [PRIVATE_KEY],
-      gasMultiplier: 1.25
+      gasMultiplier: 1.25,
+      name: 'mainnet',
     },
     goerli: {
-      url: TEST_ETH_RPC_URL,
+      url: GOERLI_ETH_RPC_URL,
       chainId: chainIds.goerli,
       accounts: [PRIVATE_KEY],
-      gasMultiplier: 1.25
+      // gasMultiplier: 1.25,
+      name: 'goerli',
     }
   },
   etherscan: {
@@ -73,24 +75,6 @@ const config = {
   },
   solidity: {
     compilers: [
-      {
-        version: "0.4.13",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
-        },
-      },
-      {
-        version: "0.4.23",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
-        },
-      },
       {
         version: "0.8.10",
         settings: {

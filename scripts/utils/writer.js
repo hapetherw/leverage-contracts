@@ -24,10 +24,10 @@ const write = async (contractName, network, address, ...args) => {
         newFile.networks[network] = {};
     }
 
-    if (network === 'mainnet') {
+    // if (network === 'mainnet') {
         newFile.networks[network].address = address;
         newFile.networks[network].args = args;
-    }
+    // }
 
     try {
         const currentDir = await getCurrentDir();

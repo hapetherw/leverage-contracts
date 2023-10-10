@@ -1,11 +1,15 @@
 const hre = require('hardhat');
+const {
+    addrs, 
+    getNetwork
+} = require('./utils');
 
 const aaveV2assetsDefaultMarket = [
     'ETH', 'DAI', 'SUSD', 'USDC', 'USDT', 'WBTC',
     'CRV', 'AAVE',
 ];
 
-const AAVE_MARKET_DATA_ADDR = '0x057835Ad21a177dbdd3090bB1CAE03EaCF78Fc6d';
+const AAVE_MARKET_DATA_ADDR = addrs[getNetwork()].AAVE_MARKET_DATA_ADDR;
 
 const STABLE_RATE = 1;
 const VARIABLE_RATE = 2;

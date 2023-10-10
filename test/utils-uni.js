@@ -1,7 +1,12 @@
 const hre = require('hardhat');
 
-const UNISWAP_FACTORY_ADDR = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
-const UNISWAP_ROUTER = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D';
+const {
+    addrs, 
+    getNetwork
+} = require('./utils');
+
+const UNISWAP_FACTORY_ADDR = addrs[getNetwork()].UNISWAP_FACTORY_ADDR;
+const UNISWAP_ROUTER = addrs[getNetwork()].UNISWAP_ROUTER;
 
 const getPair = async (tokenA, tokenB) => {
     const uniswapFactory = await hre.ethers.getContractAt('IUniswapV2Factory', UNISWAP_FACTORY_ADDR);

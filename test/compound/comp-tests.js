@@ -16,8 +16,11 @@ const {
     getProxy,
     WETH_ADDRESS,
     getAddrFromRegistry,
+    addrs,
+    getNetwork
 } = require('../utils');
-const { getBorrowBalance, COMP_ADDR } = require('../utils-comp');
+const { getBorrowBalance } = require('../utils-comp');
+const COMP_ADDR = addrs[getNetwork()].COMP_ADDR;
 
 const compSupplyTest = async (compTestLength) => {
     describe('Comp-Supply', function () {

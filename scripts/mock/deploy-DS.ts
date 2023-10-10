@@ -10,11 +10,11 @@ async function main() {
     // sleep(3000);
     // await verifyContract("DSProxyFactory");
     // await verifyContract("DSGuardFactory");
-    const strategyExecutorContract = await deployContract("StrategyExecutor");
+    const strategyStorageContract = await deployContract("StrategyStorage");
     // const dsGuardFactoryContract = await deployContract("DSGuardFactory");
-    sleep(3000);
+    sleep(5000);
     // await verifyContract("DSProxyFactory");
-    await verifyContract("StrategyExecutor");
+    await verifyContract("StrategyStorage");
 }
 
 main().catch((error) => {

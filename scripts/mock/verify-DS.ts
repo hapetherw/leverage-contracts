@@ -5,8 +5,9 @@ dotenv.config();
 
 async function main() {
 
-    await verifyContract("DSProxyFactory");
-    await verifyContract("DSGuardFactory");
+    // await verifyContract("DSProxyFactory");
+    // await verifyContract("DSGuardFactory");
+    await verifyContract("StrategyStorage");
 }
 
 main().catch((error) => {

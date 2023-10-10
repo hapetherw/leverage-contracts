@@ -26,6 +26,7 @@ const getGasPrice = async (exGasPrice) => {
     return newGasPrice;
 };
 
+// After contract deployment, this info will be stored into `deployments` folder.
 const deploy = async (contractName, signer, action, gasPrice, nonce, ...args) => {
     try {
         console.log(`---------------------------- ${contractName} --------------------------------`);
@@ -97,9 +98,7 @@ const deployAndReturnGasUsed = async (contractName, signer, action, gasPrice, no
 const deployWithResend = (contractName, signer, action, exGasPrice, nonce, ...args) => new Promise((resolve) => {
     getGasPrice(exGasPrice).then((gasPrice) => {
         const deployPromise = deploy(contractName, signer, action, gasPrice, nonce, ...args);
-
         const redeployTime = process.env.REDEPLOY_TIME_IN_MINUTES;
-
         if (!redeployTime) {
             console.log('Warning: no redeploy time set');
         } else {

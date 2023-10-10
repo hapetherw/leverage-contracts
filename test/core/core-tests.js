@@ -19,10 +19,12 @@ const {
     approve,
     placeHolderAddr,
     nullAddress,
-    OWNER_ACC,
     REGISTRY_ADDR,
     WETH_ADDRESS,
+    addrs,
+    getNetwork
 } = require('../utils');
+const OWNER_ACC = addrs[getNetwork()].OWNER_ACC;
 
 const { deployContract } = require('../../scripts/utils/deployer');
 const {
