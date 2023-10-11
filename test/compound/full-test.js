@@ -1,7 +1,7 @@
 const { assets, getAssetInfo } = require('@defisaver/tokens');
 const { resetForkToBlock } = require('../utils');
 const { compoundFullTest } = require('./comp-tests');
-const config = require('../../hardhat.config');
+const config = require('../../hardhat.config').default;
 
 // eslint-disable-next-line max-len
 const compoundCollateralAssets = assets.filter((a) => a.compoundCollateral).map((a) => getAssetInfo(a.symbol));

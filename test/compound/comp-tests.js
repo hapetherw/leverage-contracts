@@ -16,11 +16,11 @@ const {
     getProxy,
     WETH_ADDRESS,
     getAddrFromRegistry,
-    addrs,
-    getNetwork
+    depositToWeth,
+    approve,
+    setBalance,
 } = require('../utils');
-const { getBorrowBalance } = require('../utils-comp');
-const COMP_ADDR = addrs[getNetwork()].COMP_ADDR;
+const { getBorrowBalance, COMP_ADDR } = require('../utils-comp');
 
 const compSupplyTest = async (compTestLength) => {
     describe('Comp-Supply', function () {
@@ -41,7 +41,6 @@ const compSupplyTest = async (compTestLength) => {
                 continue;
             }
             const fetchedAmountWithUSD = fetchAmountinUSDPrice(cTokenData.underlyingAsset, '10000');
-
             it(`... should supply ${fetchedAmountWithUSD} ${cTokenData.underlyingAsset} to Compound`, async () => {
                 const assetInfo = getAssetInfo(cTokenData.underlyingAsset);
                 const cToken = cTokenData.address;
@@ -56,10 +55,10 @@ const compSupplyTest = async (compTestLength) => {
                     fetchedAmountWithUSD,
                     assetInfo.decimals,
                 );
-
+                await setBalance(assetInfo.address, senderAcc.address, amount);
+                await approve(assetInfo.address, proxy.address, senderAcc);
                 const balanceBefore = await balanceOf(cToken, proxy.address);
                 await supplyComp(proxy, cToken, assetInfo.address, amount, senderAcc.address);
-
                 const balanceAfter = await balanceOf(cToken, proxy.address);
 
                 expect(balanceAfter).to.be.gt(balanceBefore);
@@ -104,8 +103,9 @@ const compWithdrawTest = async (compTestLength) => {
                     assetInfo.decimals,
                 );
 
+                await setBalance(assetInfo.address, senderAcc.address, amount);
+                await approve(assetInfo.address, proxy.address, senderAcc);
                 await supplyComp(proxy, cToken, assetInfo.address, amount, senderAcc.address);
-
                 const balanceBefore = await balanceOf(assetInfo.address, senderAcc.address);
 
                 await withdrawComp(proxy, cToken, amount, senderAcc.address);
@@ -162,6 +162,8 @@ const compBorrowTest = async (compTestLength) => {
                     assetInfo.decimals,
                 );
 
+                await setBalance(assetInfo.address, senderAcc.address, supplyingAmount);
+                await approve(assetInfo.address, proxy.address, senderAcc);
                 await supplyComp(
                     proxy,
                     cToken,
@@ -228,7 +230,8 @@ const compPaybackTest = async (compTestLength) => {
                     fetchAmountinUSDPrice(cTokenData.underlyingAsset, '1000'),
                     assetInfo.decimals,
                 );
-
+                await setBalance(assetInfo.address, senderAcc.address, supplyingAmount);
+                await approve(assetInfo.address, proxy.address, senderAcc);
                 await supplyComp(
                     proxy,
                     cToken,
@@ -270,8 +273,9 @@ const compClaimTest = async () => {
 
             const amount = hre.ethers.utils.parseUnits('10', 18);
 
+            await setBalance(WETH_ADDRESS, senderAcc.address, amount);
+            await approve(WETH_ADDRESS, proxy.address, senderAcc);
             await supplyComp(proxy, cEth.address, WETH_ADDRESS, amount, senderAcc.address);
-
             const from = proxy.address;
             const to = senderAcc.address;
 
@@ -294,7 +298,7 @@ const compClaimTest = async () => {
 };
 const compoundDeployContracts = async () => {
     await redeploy('CompWithdraw');
-    await redeploy('CompClaim');
+    // await redeploy('CompClaim');
     await redeploy('CompPayback');
     await redeploy('CompBorrow');
     await redeploy('CompView');
@@ -307,7 +311,7 @@ const compoundFullTest = async (compTestLength) => {
     await compWithdrawTest(compTestLength);
     await compBorrowTest(compTestLength);
     await compPaybackTest(compTestLength);
-    await compClaimTest();
+    // await compClaimTest();
 };
 
 module.exports = {

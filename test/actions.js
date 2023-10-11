@@ -7,7 +7,10 @@ const {
     getAddrFromRegistry,
     mineBlock,
     getGasUsed,
-    addrs
+    addrs,
+    balanceOf,
+    approve,
+    WETH_ADDRESS
 } = require('./utils');
 
 const network = hre.network.config.name;
