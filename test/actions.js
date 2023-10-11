@@ -10,8 +10,10 @@ const {
     addrs,
     balanceOf,
     approve,
-    WETH_ADDRESS
+    WETH_ADDRESS,
+    setBalance
 } = require('./utils');
+const { getSecondTokenAmount } = require('./utils-uni');
 
 const network = hre.network.config.name;
 
@@ -105,6 +107,74 @@ const claimComp = async (proxy, cSupplyAddresses, cBorrowAddresses, from, to) =>
     return tx;
 };
 
+/*
+ __    __  .__   __.  __       _______.____    __    ____  ___      .______
+|  |  |  | |  \ |  | |  |     /       |\   \  /  \  /   / /   \     |   _  \
+|  |  |  | |   \|  | |  |    |   (----` \   \/    \/   / /  ^  \    |  |_)  |
+|  |  |  | |  . `  | |  |     \   \      \            / /  /_\  \   |   ___/
+|  `--'  | |  |\   | |  | .----)   |      \    /\    / /  _____  \  |  |
+ \______/  |__| \__| |__| |_______/        \__/  \__/ /__/     \__\ | _|
+*/
+const uniSupply = async (proxy, addrTokenA, tokenADecimals, addrTokenB, amount, from, to) => {
+    const amountA = hre.ethers.utils.parseUnits(amount, tokenADecimals);
+    const amountB = await getSecondTokenAmount(addrTokenA, addrTokenB, amountA);
+
+    const amountAMin = amountA.div('2');
+    const amountBMin = amountB.div('2');
+
+    // buy tokens
+    const tokenBalanceA = await balanceOf(addrTokenA, from);
+    const tokenBalanceB = await balanceOf(addrTokenB, from);
+
+    if (tokenBalanceA.lt(amountA)) {
+        setBalance(addrTokenA, from, amountA);
+    }
+
+    if (tokenBalanceB.lt(amountB)) {
+        setBalance(addrTokenB, from, amountB);
+    }
+    const deadline = Date.now() + Date.now();
+
+    const uniObj = [
+        addrTokenA,
+        addrTokenB,
+        from,
+        to,
+        amountA,
+        amountB,
+        amountAMin,
+        amountBMin,
+        deadline,
+    ];
+
+    const uniSupplyAction = new dfs.actions.uniswap.UniswapSupplyAction(...uniObj);
+
+    await approve(addrTokenA, proxy.address);
+    await approve(addrTokenB, proxy.address);
+
+    const functionData = uniSupplyAction.encodeForDsProxyCall()[1];
+
+    const tx = await executeAction('UniSupply', functionData, proxy);
+    return tx;
+};
+
+const uniWithdraw = async (proxy, addrTokenA, addrTokenB, lpAddr, liquidity, to, from) => {
+    const amountAMin = 0;
+    const amountBMin = 0;
+    const deadline = Date.now() + Date.now();
+
+    await approve(lpAddr, proxy.address);
+
+    const uniObj = [addrTokenA, addrTokenB, liquidity, to, from, amountAMin, amountBMin, deadline];
+
+    const uniWithdrawAction = new dfs.actions.uniswap.UniswapWithdrawAction(...uniObj);
+
+    const functionData = uniWithdrawAction.encodeForDsProxyCall()[1];
+
+    const tx = await executeAction('UniWithdraw', functionData, proxy);
+    return tx;
+};
+
 module.exports = {
     executeAction,
 
@@ -113,4 +183,7 @@ module.exports = {
     borrowComp,
     paybackComp,
     claimComp,
+
+    uniSupply,
+    uniWithdraw
 };
