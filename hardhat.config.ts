@@ -9,6 +9,23 @@ import "hardhat-contract-sizer";
 
 import * as dotenv from "dotenv";
 dotenv.config();
+const Dec = require('decimal.js');
+const dfs = require('@defisaver/sdk');
+
+dfs.configure({
+    testingMode: true,
+});
+
+Dec.set({
+    precision: 50,
+    rounding: 4,
+    toExpNeg: -7,
+    toExpPos: 21,
+    maxE: 9e15,
+    minE: -9e15,
+    modulo: 1,
+    crypto: false,
+});
 
 const chainIds = {
   // ethereum

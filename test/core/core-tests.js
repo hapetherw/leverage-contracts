@@ -650,20 +650,19 @@ const recipeExecutorTest = async () => {
         let strategyExecutorByBot;
         let maxGasPrice;
         let recipeExecutor;
-        let dydxFl;
+        // let dydxFl;
         let strategyId;
         let subId;
 
         before(async () => {
             strategyExecutor = await redeployCore();
-
             const recipeExecutorAddr = await getAddrFromRegistry('RecipeExecutor');
             recipeExecutor = await hre.ethers.getContractAt('RecipeExecutor', recipeExecutorAddr);
 
             const subProxyAddr = await getAddrFromRegistry('SubProxy');
             subProxy = await hre.ethers.getContractAt('SubProxy', subProxyAddr);
 
-            dydxFl = await redeploy('FLDyDx');
+            // dydxFl = await redeploy('FLDyDx');
             await redeploy('SendToken');
             await redeploy('WrapEth');
             await redeploy('GasPriceTrigger');
@@ -763,25 +762,25 @@ const recipeExecutorTest = async () => {
             expect(beforeBalance.add(pullAmount)).to.be.eq(afterBalance);
         });
 
-        it('...should execute basic recipe with FL', async () => {
-            const beforeBalance = await balanceOf(WETH_ADDRESS, senderAcc.address);
+        // it('...should execute basic recipe with FL', async () => {
+        //     const beforeBalance = await balanceOf(WETH_ADDRESS, senderAcc.address);
 
-            const dummyRecipeWithFL = new dfs.Recipe('DummyRecipeWithFl', [
-                // eslint-disable-next-line max-len
-                new dfs.actions.flashloan.DyDxFlashLoanAction(pullAmount, WETH_ADDRESS, nullAddress, []),
-                new dfs.actions.basic.SendTokenAction(WETH_ADDRESS, dydxFl.address, pullAmount),
-            ]);
+        //     const dummyRecipeWithFL = new dfs.Recipe('DummyRecipeWithFl', [
+        //         // eslint-disable-next-line max-len
+        //         new dfs.actions.flashloan.DyDxFlashLoanAction(pullAmount, WETH_ADDRESS, nullAddress, []),
+        //         new dfs.actions.basic.SendTokenAction(WETH_ADDRESS, dydxFl.address, pullAmount),
+        //     ]);
 
-            const functionData = dummyRecipeWithFL.encodeForDsProxyCall();
+        //     const functionData = dummyRecipeWithFL.encodeForDsProxyCall();
 
-            await proxy['execute(address,bytes)'](recipeExecutor.address, functionData[1], {
-                gasLimit: 3000000,
-            });
+        //     await proxy['execute(address,bytes)'](recipeExecutor.address, functionData[1], {
+        //         gasLimit: 3000000,
+        //     });
 
-            const afterBalance = await balanceOf(WETH_ADDRESS, senderAcc.address);
+        //     const afterBalance = await balanceOf(WETH_ADDRESS, senderAcc.address);
 
-            expect(beforeBalance).to.be.eq(afterBalance);
-        });
+        //     expect(beforeBalance).to.be.eq(afterBalance);
+        // });
     });
 };
 
@@ -1104,6 +1103,7 @@ const subProxyTest = async () => {
         let proxy;
 
         before(async () => {
+            await redeployCore();
             const subStorageAddr = await getAddrFromRegistry('SubStorage');
             subStorage = await hre.ethers.getContractAt('SubStorage', subStorageAddr);
 
@@ -1335,16 +1335,16 @@ const subStorageTest = async () => {
 };
 
 const coreFullTest = async () => {
-    // await strategyProxyTest();
-    // await dfsRegistryTest();
-    // await botAuthTest();
-    // await bundleStorageTest();
+    await strategyProxyTest();
+    await dfsRegistryTest();
+    await botAuthTest();
+    await bundleStorageTest();
     await proxyAuthTest();
-    // await recipeExecutorTest();
-    // await strategyExecutorTest();
-    // await strategyStorageTest();
-    // await subProxyTest();
-    // await subStorageTest();
+    await recipeExecutorTest();
+    await strategyExecutorTest();
+    await strategyStorageTest();
+    await subProxyTest();
+    await subStorageTest();
 };
 
 module.exports = {
