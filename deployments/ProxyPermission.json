@@ -1,0 +1,50 @@
+{
+	"contractName": "ProxyPermission",
+	"abi": [
+		{
+			"inputs": [],
+			"name": "EXECUTE_SELECTOR",
+			"outputs": [
+				{
+					"internalType": "bytes4",
+					"name": "",
+					"type": "bytes4"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_contractAddr",
+					"type": "address"
+				}
+			],
+			"name": "givePermission",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_contractAddr",
+					"type": "address"
+				}
+			],
+			"name": "removePermission",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	],
+	"networks": {
+		"local": {
+			"address": "0x04F75a27cE2FDC591C71a88f1EcaC7e5Ce44f5Fc",
+			"args": []
+		}
+	}
+}

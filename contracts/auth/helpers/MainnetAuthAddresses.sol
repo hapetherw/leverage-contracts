@@ -3,7 +3,7 @@
 pragma solidity =0.8.10;
 
 contract MainnetAuthAddresses {
-    address internal constant ADMIN_VAULT_ADDR = 0xCCf3d848e08b94478Ed8f46fFead3008faF581fD;
-    address internal constant DSGUARD_FACTORY_ADDRESS = 0x5a15566417e6C1c9546523066500bDDBc53F88C7; // Deployed new DSGuard Factory address
-    address internal constant ADMIN_ADDR = 0x25eFA336886C74eA8E282ac466BdCd0199f85BB9; // USED IN ADMIN VAULT CONSTRUCTOR
+    address internal constant ADMIN_VAULT_ADDR = 0xF23735718239aA125D36Bf429FC5A904E4ca5047;
+    address internal constant DSGUARD_FACTORY_ADDRESS = 0xed12bE400A07910E4d4E743E4ceE26ab1FC9a961; // Deployed new DSGuard Factory address
+    address internal constant ADMIN_ADDR = 0xe328Dd7482040d8a45fdb69A930eD8636c69087C; // USED IN ADMIN VAULT CONSTRUCTOR
 }

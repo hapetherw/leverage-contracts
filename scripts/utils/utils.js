@@ -44,9 +44,16 @@ async function changeConstantInFiles(dir, filenames, variable, value) {
     await Promise.all(filePromises);
 }
 
+async function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
 module.exports = {
     getFile,
     changeConstantInFile,
     changeConstantInFiles,
     getCurrentDir,
+    sleep
 };

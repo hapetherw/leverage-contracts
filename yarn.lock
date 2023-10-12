@@ -91,12 +91,12 @@
     eslint-config-airbnb-typescript "^17.0.0"
 
 "@defisaver/sdk@^1.0.51":
-  version "1.0.51"
-  resolved "https://registry.yarnpkg.com/@defisaver/sdk/-/sdk-1.0.51.tgz#fff17a6e07b9dfc4aa7d86428fdfce499f99b58e"
-  integrity sha512-t80fgh2YJC6sDQeJFo8+dORnQRlZKMn6DFybYit43qoRrke8HYzdDOubV7DqwHaYgSucaVljO4qj6T1BacZIMw==
+  version "1.0.53"
+  resolved "https://registry.yarnpkg.com/@defisaver/sdk/-/sdk-1.0.53.tgz#7baa31a27424063cfe9701184f12fdd76c11b483"
+  integrity sha512-uBzLBJRrR6RL4v6xc+TF+lVeow7+M7frt5mLGYzMmzYFfva6pacPNjmRRYKOYkKB5eNEc9V+6DbAWR3Nzlgeuw==
   dependencies:
     "@defisaver/eslint-config" "^1.0.0"
-    "@defisaver/tokens" "^1.4.55"
+    "@defisaver/tokens" "^1.5.0"
     "@ethersproject/address" "^5.0.10"
     "@ethersproject/solidity" "^5.0.9"
     "@types/web3-eth-abi" "^1.2.2"
@@ -106,7 +106,7 @@
     web3-eth-abi "^1.8.0"
     web3-utils "^1.8.0"
 
-"@defisaver/tokens@^1.4.55", "@defisaver/tokens@^1.5.0":
+"@defisaver/tokens@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@defisaver/tokens/-/tokens-1.5.0.tgz#7ab0411f86b7d4dd904bca25b7dc614e82f0c6ce"
   integrity sha512-FT13f5OKL05rhh5TyCYQeKb94WxTVMe13wXOLMqXIWDVJTSSG7u2UMPpQJWLGUDKKLhzoxQ7/EtT76H5bwwGmw==
@@ -602,6 +602,22 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
+
+"@leveragecom/sdk@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@leveragecom/sdk/-/sdk-0.1.5.tgz#0c148c75c0a5eec4b4b068843740069f1c839cb8"
+  integrity sha512-vaDFN06KSBFrXfMEM+TlRexdSCmkTI6QuMgiYsvUMZQy7QPoYmRyMtRWHGfnYHSFHGWjx2gYAzNagVnOaXBq/g==
+  dependencies:
+    "@defisaver/eslint-config" "^1.0.0"
+    "@defisaver/tokens" "^1.5.0"
+    "@ethersproject/address" "^5.0.10"
+    "@ethersproject/solidity" "^5.0.9"
+    "@types/web3-eth-abi" "^1.2.2"
+    axios "^0.21.1"
+    decimal.js "^10.2.1"
+    web3 "^1.10.1"
+    web3-eth-abi "^1.8.0"
+    web3-utils "^1.8.0"
 
 "@metamask/eth-sig-util@^4.0.0":
   version "4.0.1"

@@ -8,7 +8,7 @@ const compoundCollateralAssets = assets.filter((a) => a.compoundCollateral).map(
 
 describe('Compound full test', () => {
     it('... should do full Compound test', async () => {
-        await resetForkToBlock();
+        // await resetForkToBlock();
         let testLength = compoundCollateralAssets.length;
         if (config.lightTesting) testLength = 2;
         await compoundFullTest(testLength);

@@ -10,7 +10,7 @@ import "hardhat-contract-sizer";
 import * as dotenv from "dotenv";
 dotenv.config();
 const Dec = require('decimal.js');
-const dfs = require('@defisaver/sdk');
+const dfs = require('@leveragecom/sdk');
 
 dfs.configure({
     testingMode: true,

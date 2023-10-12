@@ -17,11 +17,12 @@ const {
     WETH_ADDRESS,
     addrs,
     getNetwork,
-    getOwnerAddr
+    getOwnerAddr,
+    getAdminAddr
 } = require('../utils.js');
 
-const OWNER_ACC = getOwnerAddr()
-const ADMIN_ACC = addrs[getNetwork()].ADMIN_ACC;
+const OWNER_ACC = getOwnerAddr();
+const ADMIN_ACC = getAdminAddr();
 
 const adminAuthTest = async () => {
     describe('Admin-Auth', () => {

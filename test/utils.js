@@ -17,10 +17,15 @@ const proxyAuthBytecode = require('../artifacts/contracts/core/strategy/ProxyAut
 
 const addrs = {
     mainnet: {
-        PROXY_REGISTRY: '0x4678f0a6958e4D2Bc4F1BAF7Bc52E8F3564f3fE4',
-        REGISTRY_ADDR: '0x287778F121F134C66212FB16c9b53eC991D32f5b',
-        PROXY_AUTH_ADDR: '0x149667b6FAe2c63D1B4317C716b0D0e4d3E2bD70',
-        OWNER_ACC: '0xBc841B0dE0b93205e912CFBBd1D0c160A1ec6F00',
+        PROXY_REGISTRY: '0xc775bF567D67018dfFac4E89a7Cf10f0EDd0Be93',
+        REGISTRY_ADDR: '0x6Ae83B76985aCD1E7f3CA0C5615D095Baa71f9F6',
+        PROXY_AUTH_ADDR: '0x9f62EE65a8395824Ee0821eF2Dc4C947a23F0f25',
+        OWNER_ACC: '0xF880B4c30c29Da07E324f45e4FdCfCe3d0aBEF8B',
+        ADMIN_VAULT: '0xF23735718239aA125D36Bf429FC5A904E4ca5047',
+        ADMIN_ACC: '0xe328Dd7482040d8a45fdb69A930eD8636c69087C',
+        StrategyProxy: '0x9A86494Ba45eE1f9EEed9cFC0894f6C5d13a1F0b',
+        SubProxy: '0xFf658343244c0475b9305859F1b7CDAB9784762f',
+
         WETH_ADDRESS: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
         DAI_ADDRESS: '0x6b175474e89094c44da98b954eedeac495271d0f',
         ETH_ADDR: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
@@ -29,8 +34,6 @@ const addrs = {
         USDC_ADDR: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
         EXCHANGE_OWNER_ADDR: '0xBc841B0dE0b93205e912CFBBd1D0c160A1ec6F00',
         SAVER_EXCHANGE_ADDR: '0x25dd3F51e0C3c3Ff164DDC02A8E4D65Bb9cBB12D',
-        StrategyProxy: '0x0822902D30CC9c77404e6eB140dC1E98aF5b559A',
-        SubProxy: '0xd18d4756bbf848674cc35f1a0B86afEF20787382',
         UNISWAP_FACTORY_ADDR: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
         UNISWAP_ROUTER: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
         AAVE_MARKET_DATA_ADDR: '0x057835Ad21a177dbdd3090bB1CAE03EaCF78Fc6d',
@@ -49,8 +52,6 @@ const addrs = {
         ZRX_ALLOWLIST_OWNER: '0xBc841B0dE0b93205e912CFBBd1D0c160A1ec6F00',
         AAVE_SUB_PROXY: '0xb9F73625AA64D46A9b2f0331712e9bEE19e4C3f7',
         CURVE_USD_WRAPPER: '0x3788B4Db5e99fF555e22a08241EB3cFc3a0ac149',
-        ADMIN_VAULT: '0xCCf3d848e08b94478Ed8f46fFead3008faF581fD',
-        ADMIN_ACC: '0x25eFA336886C74eA8E282ac466BdCd0199f85BB9',
         DFS_REG_CONTROLLER: '0x6F6DaE1bCB60F67B2Cb939dBE565e8fD03F6F002',
         AVG_GAS_PRICE: 100,
     },
@@ -64,7 +65,6 @@ const addrs = {
     },
 };
 
-const REGISTRY_ADDR = '0x287778F121F134C66212FB16c9b53eC991D32f5b';
 require('dotenv').config();
 
 const config = require('../hardhat.config');
@@ -112,9 +112,6 @@ const LUSD_ADDR = '0x5f98805A4E8be255a32880FDeC7F6728C6568bA0';
 
 const USDT_ADDR = '0xdac17f958d2ee523a2206206994597c13d831ec7';
 const BUSD_ADDR = '0x4fabb145d64652a948d72533023f6e7a623c7c53';
-
-const OWNER_ACC = '0xBc841B0dE0b93205e912CFBBd1D0c160A1ec6F00';
-const ADMIN_ACC = '0x25eFA336886C74eA8E282ac466BdCd0199f85BB9';
 
 const rariDaiFundManager = '0xB465BAF04C087Ce3ed1C266F96CA43f4847D9635';
 const rdptAddress = '0x0833cfcb11A5ba89FbAF73a407831c98aD2D7648';
@@ -242,6 +239,7 @@ const BN2Float = hre.ethers.utils.formatUnits;
 const Float2BN = hre.ethers.utils.parseUnits;
 
 const getOwnerAddr = () => addrs[network].OWNER_ACC;
+const getAdminAddr = () => addrs[network].ADMIN_ACC;
 
 async function findBalancesSlot(tokenAddress) {
     const slotObj = storageSlots[tokenAddress];
@@ -1054,11 +1052,11 @@ async function setForkForTesting() {
         '0xC9F2C9CD04674EDEA40000000',  // 10^12 Ether
     ]);
     await hre.network.provider.send('hardhat_setBalance', [
-        OWNER_ACC,
+        getOwnerAddr(),
         '0xC9F2C9CD04674EDEA40000000',  // 10^12 Ether
     ]);
     await hre.network.provider.send('hardhat_setBalance', [
-        ADMIN_ACC,
+        getAdminAddr(),
         '0xC9F2C9CD04674EDEA40000000',  // 10^12 Ether
     ]);
     await hre.network.provider.send('hardhat_setNextBlockBaseFeePerGas', [
@@ -1170,7 +1168,6 @@ module.exports = {
     standardAmounts,
     nullAddress,
     dydxTokens,
-    REGISTRY_ADDR,
     AAVE_MARKET,
     DAI_ADDR,
     KYBER_WRAPPER,
@@ -1178,8 +1175,6 @@ module.exports = {
     OASIS_WRAPPER,
     WETH_ADDRESS,
     ETH_ADDR,
-    OWNER_ACC,
-    ADMIN_ACC,
     USDC_ADDR,
     AAVE_FL_FEE,
     AAVE_V3_FL_FEE,
@@ -1236,4 +1231,5 @@ module.exports = {
     getContractFromRegistry,
     filterEthersObject,
     addrs,
+    getAdminAddr
 };

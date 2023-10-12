@@ -1,5 +1,5 @@
 {
-	"contractName": "SendToken",
+	"contractName": "UniSupply",
 	"abi": [
 		{
 			"inputs": [],
@@ -185,6 +185,19 @@
 		},
 		{
 			"inputs": [],
+			"name": "factory",
+			"outputs": [
+				{
+					"internalType": "contract IUniswapV2Factory",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "kill",
 			"outputs": [],
 			"stateMutability": "nonpayable",
@@ -217,7 +230,17 @@
 					"components": [
 						{
 							"internalType": "address",
-							"name": "tokenAddr",
+							"name": "tokenA",
+							"type": "address"
+						},
+						{
+							"internalType": "address",
+							"name": "tokenB",
+							"type": "address"
+						},
+						{
+							"internalType": "address",
+							"name": "from",
 							"type": "address"
 						},
 						{
@@ -227,12 +250,32 @@
 						},
 						{
 							"internalType": "uint256",
-							"name": "amount",
+							"name": "amountADesired",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amountBDesired",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amountAMin",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amountBMin",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "deadline",
 							"type": "uint256"
 						}
 					],
-					"internalType": "struct SendToken.Params",
-					"name": "params",
+					"internalType": "struct UniSupply.UniSupplyData",
+					"name": "uniData",
 					"type": "tuple"
 				}
 			],
@@ -245,6 +288,19 @@
 			"outputs": [
 				{
 					"internalType": "contract DFSRegistry",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "router",
+			"outputs": [
+				{
+					"internalType": "contract IUniswapRouter",
 					"name": "",
 					"type": "address"
 				}
@@ -278,7 +334,7 @@
 	],
 	"networks": {
 		"local": {
-			"address": "0xBc153693BFAe1Ca202872a382aED20a1306C9200",
+			"address": "0x0BFC626B583e93A5F793Bc2cAa195BDBB2ED9F20",
 			"args": []
 		}
 	}

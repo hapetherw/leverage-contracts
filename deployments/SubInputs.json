@@ -1,5 +1,5 @@
 {
-	"contractName": "SendToken",
+	"contractName": "SubInputs",
 	"abi": [
 		{
 			"inputs": [],
@@ -216,22 +216,17 @@
 				{
 					"components": [
 						{
-							"internalType": "address",
-							"name": "tokenAddr",
-							"type": "address"
-						},
-						{
-							"internalType": "address",
-							"name": "to",
-							"type": "address"
+							"internalType": "uint256",
+							"name": "a",
+							"type": "uint256"
 						},
 						{
 							"internalType": "uint256",
-							"name": "amount",
+							"name": "b",
 							"type": "uint256"
 						}
 					],
-					"internalType": "struct SendToken.Params",
+					"internalType": "struct SubInputs.Params",
 					"name": "params",
 					"type": "tuple"
 				}
@@ -278,7 +273,7 @@
 	],
 	"networks": {
 		"local": {
-			"address": "0xBc153693BFAe1Ca202872a382aED20a1306C9200",
+			"address": "0x084815D1330eCC3eF94193a19Ec222C0C73dFf2d",
 			"args": []
 		}
 	}

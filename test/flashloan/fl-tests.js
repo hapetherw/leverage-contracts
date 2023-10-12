@@ -3,7 +3,7 @@ const { getAssetInfo } = require('@defisaver/tokens');
 const hre = require('hardhat');
 const Dec = require('decimal.js');
 
-const dfs = require('@defisaver/sdk');
+const dfs = require('@leveragecom/sdk');
 
 const {
     getAddrFromRegistry,

@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const dfs = require('@defisaver/sdk');
+const dfs = require('@leveragecom/sdk');
 const hre = require('hardhat');
 
 const { getAssetInfo, ilks } = require('@defisaver/tokens');

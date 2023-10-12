@@ -1,5 +1,5 @@
 {
-	"contractName": "SendToken",
+	"contractName": "UniWithdraw",
 	"abi": [
 		{
 			"inputs": [],
@@ -185,6 +185,19 @@
 		},
 		{
 			"inputs": [],
+			"name": "factory",
+			"outputs": [
+				{
+					"internalType": "contract IUniswapV2Factory",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "kill",
 			"outputs": [],
 			"stateMutability": "nonpayable",
@@ -217,8 +230,18 @@
 					"components": [
 						{
 							"internalType": "address",
-							"name": "tokenAddr",
+							"name": "tokenA",
 							"type": "address"
+						},
+						{
+							"internalType": "address",
+							"name": "tokenB",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "liquidity",
+							"type": "uint256"
 						},
 						{
 							"internalType": "address",
@@ -226,13 +249,28 @@
 							"type": "address"
 						},
 						{
+							"internalType": "address",
+							"name": "from",
+							"type": "address"
+						},
+						{
 							"internalType": "uint256",
-							"name": "amount",
+							"name": "amountAMin",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amountBMin",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "deadline",
 							"type": "uint256"
 						}
 					],
-					"internalType": "struct SendToken.Params",
-					"name": "params",
+					"internalType": "struct UniWithdraw.UniWithdrawData",
+					"name": "uniData",
 					"type": "tuple"
 				}
 			],
@@ -245,6 +283,19 @@
 			"outputs": [
 				{
 					"internalType": "contract DFSRegistry",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "router",
+			"outputs": [
+				{
+					"internalType": "contract IUniswapRouter",
 					"name": "",
 					"type": "address"
 				}
@@ -278,7 +329,7 @@
 	],
 	"networks": {
 		"local": {
-			"address": "0xBc153693BFAe1Ca202872a382aED20a1306C9200",
+			"address": "0x76d05F58D14c0838EC630C8140eDC5aB7CD159Dc",
 			"args": []
 		}
 	}

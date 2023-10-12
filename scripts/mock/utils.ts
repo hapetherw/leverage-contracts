@@ -58,9 +58,3 @@ export async function verifyContract (
     
     console.log(`---------------------------Verified ${contractName}----------------------------------`);
 };
-
-export function sleep(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-}

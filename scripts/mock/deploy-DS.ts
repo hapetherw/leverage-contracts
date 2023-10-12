@@ -1,4 +1,5 @@
-import { deployContract, sleep, verifyContract } from "./utils"
+import { deployContract, verifyContract } from "./utils"
+import { sleep } from "../utils/utils";
 
 import * as dotenv from "dotenv";
 dotenv.config();

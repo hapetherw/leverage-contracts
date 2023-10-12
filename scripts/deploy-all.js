@@ -7,16 +7,19 @@ const { start } = require('./utils/starter');
 
 const { changeConstantInFiles } = require('./utils/utils');
 
-const { redeploy, OWNER_ACC } = require('../test/utils');
-
-// const { addBotCaller } = require('../test/utils-strategies');
-
+const { redeploy, resetForkToBlock, impersonateAccount, stopImpersonatingAccount, getOwnerAddr, setForkForTesting} = require('../test/utils');
+const OWNER_ACC = getOwnerAddr();
 async function main() {
+    let signer;
+    if (hre.network.name === "hardhat" || hre.network.name === "local") {   // mainnet forking
+        signer = await hre.ethers.provider.getSigner(OWNER_ACC);
+        // await resetForkToBlock();
+        await setForkForTesting();
+        await impersonateAccount(OWNER_ACC);
+    } else { // mainnet or testnet
+        signer = await hre.ethers.getSigners()[0];
+    }
 
-    // const signer = await hre.ethers.provider.getSigner(OWNER_ACC);
-
-    const [signer] = await hre.ethers.getSigners();
-    
     // Deploy Auth Contracts
     const adminVault = await deployAsOwner('AdminVault', signer);
 
@@ -27,10 +30,6 @@ async function main() {
         adminVault.address,
     );
     await run('compile');
-
-    const adminAuth = await deployAsOwner('AdminAuth', signer);
-
-    const proxyPermission = await deployAsOwner('ProxyPermission', signer);
 
     // Deploy Defisaver Logger contract(utils contract)
     const defiSaverLogger = await deployAsOwner('DefisaverLogger', signer);
@@ -52,7 +51,10 @@ async function main() {
     );
     await run('compile');
 
-    const strategyStorage = await deployAsOwner('StrategyStorage', signer);
+    await redeploy('AdminAuth', reg.address);
+    await redeploy('ProxyPermission', reg.address);
+
+    const strategyStorage = await redeploy('StrategyStorage', reg.address);
     await changeConstantInFiles(
         './contracts',
         ['MainnetCoreAddresses'],
@@ -61,7 +63,7 @@ async function main() {
     );
     await run('compile');
 
-    const bundleStorage = await deployAsOwner('BundleStorage', signer);
+    const bundleStorage = await redeploy('BundleStorage', reg.address);
     await changeConstantInFiles(
         './contracts',
         ['MainnetCoreAddresses'],
@@ -70,7 +72,7 @@ async function main() {
     );
     await run('compile');
 
-    const subStorage = await deployAsOwner('SubStorage', signer);
+    const subStorage = await redeploy('SubStorage', reg.address);
     await changeConstantInFiles(
         './contracts',
         ['MainnetCoreAddresses'],
@@ -79,7 +81,7 @@ async function main() {
     );
     await run('compile');
 
-    const proxyAuth = await deployAsOwner('ProxyAuth', signer);
+    const proxyAuth = await redeploy('ProxyAuth', reg.address);
     await changeConstantInFiles(
         './contracts',
         ['MainnetCoreAddresses'],
@@ -88,7 +90,7 @@ async function main() {
     );
     await run('compile');
     
-    const recipeExecutor = await deployAsOwner('RecipeExecutor', signer);
+    const recipeExecutor = await redeploy('RecipeExecutor', reg.address);
     await changeConstantInFiles(
         './contracts',
         ['MainnetCoreAddresses'],
@@ -97,37 +99,40 @@ async function main() {
     );
     await run('compile');
     
-    const strategyExecutor = await deployAsOwner('StrategyExecutor', signer);
+    await redeploy('StrategyExecutor', reg.address);
 
-    const strategyProxy = await deployAsOwner('StrategyProxy', signer);
-    const subProxy = await deployAsOwner('SubProxy', signer);
-    const botAuth = await deployAsOwner('BotAuth', signer);
+    await redeploy('StrategyProxy', reg.address);
+    await redeploy('SubProxy', reg.address);
+    await redeploy('BotAuth', reg.address);
 
     // Deploy Action contracts and add them into DFSRegistry contract
-    redeploy('CompBorrow', reg.address);
-    redeploy('CompClaim', reg.address);
-    redeploy('CompCollateralSwitch', reg.address);
-    redeploy('CompGetDebt', reg.address);
-    redeploy('CompPayback', reg.address);
-    redeploy('CompSupply', reg.address);
-    redeploy('CompWithdraw', reg.address);
+    await redeploy('CompBorrow', reg.address);
+    await redeploy('CompClaim', reg.address);
+    await redeploy('CompCollateralSwitch', reg.address);
+    await redeploy('CompGetDebt', reg.address);
+    await redeploy('CompPayback', reg.address);
+    await redeploy('CompSupply', reg.address);
+    await redeploy('CompWithdraw', reg.address);
     
-    redeploy('FLAaveV2', reg.address);
+    await redeploy('FLAaveV2', reg.address);
     
-    redeploy('UniSupply', reg.address);
-    redeploy('UniWithdraw', reg.address);
+    await redeploy('UniSupply', reg.address);
+    await redeploy('UniWithdraw', reg.address);
     
-    redeploy('ApproveToken', reg.address);
-    redeploy('PullToken', reg.address);
-    redeploy('SendToken', reg.address);
-    redeploy('SendTokenAndUnwrap', reg.address);
-    redeploy('SendTokens', reg.address);
-    redeploy('SubInputs', reg.address);
-    redeploy('SumInputs', reg.address);
-    redeploy('TokenBalance', reg.address);
-    redeploy('UnwrapEth', reg.address);
-    redeploy('WrapEth', reg.address);
-
+    await redeploy('ApproveToken', reg.address);
+    await redeploy('PullToken', reg.address);
+    await redeploy('SendToken', reg.address);
+    await redeploy('SendTokenAndUnwrap', reg.address);
+    await redeploy('SendTokens', reg.address);
+    await redeploy('SubInputs', reg.address);
+    await redeploy('SumInputs', reg.address);
+    await redeploy('TokenBalance', reg.address);
+    await redeploy('UnwrapEth', reg.address);
+    await redeploy('WrapEth', reg.address);
+    
+    if (hre.network.name === "hardhat" || hre.network.name === "local") {   // mainnet forking
+        await stopImpersonatingAccount(OWNER_ACC);
+    }
     process.exit(0);
 }
 

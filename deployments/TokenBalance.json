@@ -1,5 +1,5 @@
 {
-	"contractName": "SendToken",
+	"contractName": "TokenBalance",
 	"abi": [
 		{
 			"inputs": [],
@@ -145,17 +145,17 @@
 				},
 				{
 					"internalType": "bytes32[]",
-					"name": "_subData",
+					"name": "",
 					"type": "bytes32[]"
 				},
 				{
 					"internalType": "uint8[]",
-					"name": "_paramMapping",
+					"name": "",
 					"type": "uint8[]"
 				},
 				{
 					"internalType": "bytes32[]",
-					"name": "_returnValues",
+					"name": "",
 					"type": "bytes32[]"
 				}
 			],
@@ -222,16 +222,11 @@
 						},
 						{
 							"internalType": "address",
-							"name": "to",
+							"name": "holderAddr",
 							"type": "address"
-						},
-						{
-							"internalType": "uint256",
-							"name": "amount",
-							"type": "uint256"
 						}
 					],
-					"internalType": "struct SendToken.Params",
+					"internalType": "struct TokenBalance.Params",
 					"name": "params",
 					"type": "tuple"
 				}
@@ -278,7 +273,7 @@
 	],
 	"networks": {
 		"local": {
-			"address": "0xBc153693BFAe1Ca202872a382aED20a1306C9200",
+			"address": "0x9abb5861e3a1eDF19C51F8Ac74A81782e94F8FdC",
 			"args": []
 		}
 	}

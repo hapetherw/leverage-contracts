@@ -1,5 +1,5 @@
 {
-	"contractName": "SendToken",
+	"contractName": "WrapEth",
 	"abi": [
 		{
 			"inputs": [],
@@ -216,22 +216,12 @@
 				{
 					"components": [
 						{
-							"internalType": "address",
-							"name": "tokenAddr",
-							"type": "address"
-						},
-						{
-							"internalType": "address",
-							"name": "to",
-							"type": "address"
-						},
-						{
 							"internalType": "uint256",
 							"name": "amount",
 							"type": "uint256"
 						}
 					],
-					"internalType": "struct SendToken.Params",
+					"internalType": "struct WrapEth.Params",
 					"name": "params",
 					"type": "tuple"
 				}
@@ -278,7 +268,7 @@
 	],
 	"networks": {
 		"local": {
-			"address": "0xBc153693BFAe1Ca202872a382aED20a1306C9200",
+			"address": "0xe24e7570Fe7207AdAaAa8c6c89a59850391B5276",
 			"args": []
 		}
 	}

@@ -388,7 +388,7 @@
 	],
 	"networks": {
 		"local": {
-			"address": "0x9eb52339B52e71B1EFD5537947e75D23b3a7719B",
+			"address": "0x9bDD64340D3CE0607f51bBC7508CA40D45849ab8",
 			"args": []
 		}
 	}
