@@ -14,6 +14,12 @@ Leverage contracts
 
 
 ## How to deploy all contracts
+1. Compile all contracts at start:
+
+`npx hardhat compile`
+
+2. Deploy contracts
+
 `yarn deploy local deploy-all`
 
 ## How to run tests
@@ -24,19 +30,17 @@ Before running tests from the latest fork block it's necessary to update the pri
 
 `node scripts/utils/price-tracker.js`
 
-1. Compile all contracts at start:
-
-`npx hardhat compile`
-
-2. You need to start a hardhat node from the forked mainnet with the following command:
+1. You need to start a hardhat node from the forked mainnet with the following command:
 
 `npx hardhat node --max-memory 8192  --fork MAIN_ETH_RPC_URL`
+
 or
+
 `npx hardhat node --max-memory 8192  --network hardhat`
 
-3. After that you can run the tests, for example:
-`yarn test local ./auth/full-test.js`
-`yarn test local ./core/full-test.js`
-`yarn test local ./compound/full-test.js`
-`yarn test local ./uniswap/v2/full-test.js`
-`yarn test local ./flashloan/full-test.js`
+2. After that you can run the tests, for example:
+- `yarn test local ./auth/full-test.js`
+- `yarn test local ./core/full-test.js`
+- `yarn test local ./compound/full-test.js`
+- `yarn test local ./uniswap/v2/full-test.js`
+- `yarn test local ./flashloan/full-test.js`
